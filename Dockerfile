@@ -1,6 +1,6 @@
-FROM alpine:3.10 as builder
+FROM alpine:3.12 as builder
 
-ENV VARNISH_VERSION=6.2
+ENV VARNISH_VERSION=6.4
 ENV QUERYFILTER_VERSION=v1.0.0
 
 RUN apk update; apk add varnish varnish~${VARNISH_VERSION} curl autoconf libtool pkgconfig automake varnish-dev make python3
@@ -9,9 +9,9 @@ RUN curl -L https://github.com/nytimes/libvmod-queryfilter/archive/${QUERYFILTER
 
 RUN cd /tmp/libvmod-queryfilter-* && ./autogen.sh && ./configure && make && make check
 
-FROM alpine:3.10
+FROM alpine:3.12
 
-ENV VARNISH_VERSION=6.2
+ENV VARNISH_VERSION=6.4
 
 RUN apk update; apk add varnish varnish~${VARNISH_VERSION} curl
 
